@@ -1,0 +1,7 @@
+def gets(remote, command) {
+    // Zip the folder on the remote machine
+    command.module = "-m ansible.builtin.command -a 'powershell.exe Compress-Archive -Path \"${command.from}\" -DestinationPath \"${command.info}/folder.zip\"'"
+
+    // Fetch the zipped folder to the local machine
+    remote.fetchZip = "-m ansible.builtin.fetch -a 'src=${command.info}/folder.zip dest=${command.local} flat=yes'"
+}
